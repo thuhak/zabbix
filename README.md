@@ -12,3 +12,7 @@
 - 天融信入侵防御
 - dell idrac
 - sqlserver
+- windows
+- iis
+- dell compellent存储
+- brocade fc交换机
