@@ -1,6 +1,6 @@
 # zabbix相关
 
-## zabbix数据库
+### zabbix数据库
 
 - 一个postgre的表分区方案
 
@@ -16,3 +16,7 @@
 - iis
 - dell compellent存储
 - brocade fc交换机
+
+### zabbix客户端部署
+
+- 利用saltstack部署和升级zabbix客户端的sls文件
