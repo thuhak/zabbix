@@ -20,7 +20,7 @@ zabbix通信细节见zabbix官方文档[Passive and active agent checks](https:/
 样式代码如下：
 
 ```python
-senddata=[Metric('traptest','123'),Metric('traptest','456')
+senddata=[Metric('traptest','123'),Metric('traptest','456')]
 with ZbxSender(host='test',zbxhost='192.168.1.1') as zbx:
     zbx.send(senddata)
 ```
