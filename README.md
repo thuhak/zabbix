@@ -20,3 +20,7 @@
 ### zabbix客户端部署
 
 - 利用saltstack部署和升级zabbix客户端的sls文件
+
+### zabbix工具
+
+- zabbix sender的Python实现
