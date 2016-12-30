@@ -57,7 +57,7 @@ fs.file-max:  # 最大文件打开数
     - device: /dev/sdb1
     - fstype: ext3
     - mkmnt: False
-    - opts: defaults,noatime,nodiratime,data=ordered # 关闭atime以增加性能
+    - opts: defaults,noatime,nodiratime,data=ordered,barrier=0 # 关闭atime以增加性能
     - user: postgres
 
 /zabbix-history: # 历史,趋势数据表表空间分区
@@ -65,7 +65,7 @@ fs.file-max:  # 最大文件打开数
     - device: /dev/sdc1
     - fstype: ext3
     - mkmnt: False
-    - opts: defaults,noatime,nodiratime,data=writeback # 关闭atime并把日志模式设置成writeback用以获得最佳性能
+    - opts: defaults,noatime,nodiratime,data=writeback,barrier=0 # 关闭atime并把日志模式设置成writeback用以获得最佳性能
     - user: postgres
 
 
