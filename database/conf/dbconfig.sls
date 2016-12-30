@@ -18,6 +18,30 @@ vm.dirty_writeback_centisecs: # 每秒调用pdflush进行脏页回写
   sysctl.present:
     - value: 100
 
+dthp:
+  file.managed:
+    - name: /usr/sbin/disable_tran_huge_page.sh
+    - source: salt://zabbix/server/disable_tran_huge_page.sh
+    - mode: 755
+
+servicefile:
+  file.managed:
+    - name: /usr/lib/systemd/system/DisableTranHugePage.service
+    - source: salt://zabbix/server/DisableTranHugePage.service
+    - mode: 600
+    - require:
+      - file: dthp
+
+DisableTranHugePage:
+  service.running:
+    - enable: True
+    - require:
+      - file: servicefile
+
+vm.nr_hugepages: # 2M页面2072个,满足4G的buffer,以及其他工作内存的需求
+  sysctl.present:
+    - value: 2560
+
 fs.aio-max-nr: # 最大同时异步IO数
   sysctl.present:
     - value: 1048576 #1024 x 1024
@@ -43,3 +67,5 @@ fs.file-max:  # 最大文件打开数
     - mkmnt: False
     - opts: defaults,noatime,nodiratime,data=writeback # 关闭atime并把日志模式设置成writeback用以获得最佳性能
     - user: postgres
+
+

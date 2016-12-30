@@ -1,0 +1,13 @@
+[Unit]
+Description = Disable transparent huge page
+ConditionPathExists = /sys/kernel/mm/transparent_hugepage/enabled
+ConditionPathExists = /sys/kernel/mm/transparent_hugepage/defrag
+Before = postgresql.service
+
+[Service]
+ExecStart = /usr/sbin/disable_tran_huge_page.sh
+Type = oneshot
+RemainAfterExit = yes
+
+[Install]
+WantedBy=multi-user.target
