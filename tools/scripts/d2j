@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""
+dict to json
+"""
+
+import json
+import sys
+import re
+from argparse import ArgumentParser
+
+
+def main():
+    parser = ArgumentParser(description='transfer normal format to json')
+    parser.add_argument('-d', '--delimiter', default=None, help='delimiter')
+    parser.add_argument('-i', '--input', default=None, help='inpute file')
+    parser.add_argument('-o', '--output', default=None, help='output file')
+    parser.add_argument('-ih', '--include_header', action='store_true', help='if input include header')
+    args = parser.parse_args()
+    delimiter = args.delimiter
+    input_f = args.input
+    output_f = args.output
+    header = args.include_header
+    int_n = '-?\d+'
+    float_n = '-?\d+\.\d+'
+    d = {}
+    if input_f:
+        infile = open(input_f, 'rb')
+    else:
+        infile = sys.stdin
+    if output_f:
+        outfile = open(output_f, 'wb')
+    else:
+        outfile = sys.stdout
+    if header:
+        infile.next()
+    with infile:
+        for l in infile:
+            try:
+                if delimiter:
+                    k, v = l.split(delimiter)
+                    k = k.strip()
+                    v = v.strip()
+                else:
+                    k, v = l.split()
+                if re.match(float_n, v):
+                    v = float(v)
+                elif re.match(int_n, v):
+                    v = int(v)
+                d[k] = v
+            except:
+                pass
+    with outfile:
+        json.dump(d, outfile, sort_keys=True,
+                  indent=4, separators=(',', ': '))
+        outfile.write('\n')
+
+
+if __name__ == "__main__":
+    main()

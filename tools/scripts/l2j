@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""
+list to json
+"""
+import json
+import sys
+import re
+
+
+def trans(text):
+    INT = r'(?P<INT>^\d+$)'
+    FLOAT = r'(?P<FLOAT>^\d+\.\d+$)'
+    pat = re.compile('|'.join([INT, FLOAT]))
+    m = pat.match(text)
+    if not m:
+        return text
+    if m.lastgroup == 'INT':
+        return int(text)
+    elif m.lastgroup == 'FLOAT':
+        return float(text)
+
+
+items = [trans(x) for x in sys.stdin.readline().strip().split()]
+print(json.dumps(items))
