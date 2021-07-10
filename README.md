@@ -18,6 +18,11 @@
 - iis
 - dell compellent存储
 - brocade fc交换机
+- HPC
+    - CPU: flops, numa, freq
+    - mem: 内存吞吞吐
+    - pbs: pbs 队列数据统计
+- NFS
 
 ### zabbix客户端部署
 
@@ -25,4 +30,4 @@
 
 ### zabbix工具
 
-- zabbix sender的Python实现
+若干辅助脚本
